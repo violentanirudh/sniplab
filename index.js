@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
@@ -6,7 +8,7 @@ const flash = require('connect-flash')
 const mongoose = require('mongoose')
 
 // MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/snippets').then(() => console.log('Connected')).catch(error => console.log(error))
+mongoose.connect(process.env.MONGODB).then(() => console.log('Connected')).catch(error => console.log(error))
 
 // App
 const app = express()
@@ -16,6 +18,7 @@ const app = express()
 const ViewsRouter = require('./routes/views')
 const AuthRouter = require('./routes/auth')
 const ProtectedRouter = require('./routes/protected')
+const APIRouter = require('./routes/api')
 
 // Configuration
 app.set('view engine', 'ejs')
@@ -24,7 +27,6 @@ app.set('views', path.join(__dirname, 'views'))
 // Custom Middlewares
 
 const AuthMiddleware = require('./middlewares/auth')
-
 
 // Middlewares
 app.use(session({
@@ -41,11 +43,12 @@ app.use(AuthMiddleware.checkAuthCookie())
 
 
 // Routes
+app.use('/api', APIRouter)
 app.use('/auth', AuthRouter)
 app.use('/', ViewsRouter)
 app.use('/', AuthMiddleware.checkAuthorization(['user']), ProtectedRouter)
 
 // Server
-app.listen(3000, () => {
-    console.log('Listening On : http://127.0.0.1:3000')
+app.listen(process.env.PORT, () => {
+    console.log(`Listening On : http://127.0.0.1:${process.env.PORT}`)
 })

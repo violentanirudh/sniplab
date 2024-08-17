@@ -1,33 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <%- include('./partials/head') %>
-    <title>Snippets</title>
-</head>
-<body class="bg-zinc-50 leading-relaxed">
+    <head>
+        <%- include('./partials/head') %>
+        <title><%= process.env.APP %></title>
+    </head>
+    <body class="bg-zinc-50 leading-relaxed">
+        <div class="container max-w-screen-md mx-auto py-10 px-4">
+            <%- include('./partials/navbar') %>
 
-    <div class="container max-w-screen-md mx-auto py-10 px-4">        
-
-        <%- include('./partials/navbar') %>
-
-        <div class="grid grid-template-cols-3 gap-8 my-20">
-            
-            <% files.forEach((file) => { %>
-                <%- include('./partials/card', { file }) %>
-            <% }) %>
-
+            <div id="cards-container" class="grid grid-template-cols-3 gap-8 my-20"></div>
         </div>
 
-        <div class="flex items-center justify-end gap-2">
-            <% if (validPages.previous) { %>
-                <a class="text-sm bg-white hover:bg-zinc-50 py-2 px-4 rounded ring-1 ring-zinc-200 outline-none duration-200" href="/page/<%= validPages.page - 1 %>">Previous</a> 
-            <% } %>
-            <% if (validPages.next) { %>
-                <a class="text-sm bg-white hover:bg-zinc-50 py-2 px-4 rounded ring-1 ring-zinc-200 outline-none duration-200" href="/page/<%= validPages.page + 1 %>">Next</a> 
-            <% } %>
-        </div>
+        <script>
 
-    </div>
-    
-</body>
+            let more = { scroll: true, page: 0, stop: false }
+
+            const fetchSnips = async (page = 0) => {
+
+                const snips = await fetch('/api/snips?page=' + page)
+                const container = document.getElementById('cards-container')
+
+                if (snips.status === 200) {
+                    const data = await snips.json()
+
+                    data.data.snips.forEach(item => {
+                        const html =
+
+                        `<div class="w-full space-y-2">
+                            <span class="px-2 py-1 rounded text-sm bg-indigo-600 text-white">${item.language}</span>
+                            <h2 class="text-2xl font-semibold"><a href="${item.uid}/${item.slug}" class="text-zinc-800 hover:text-indigo-600 cursor-pointer">${item.heading}</a></h2>
+                            <p class="text-zinc-600">${item.description.substring(0, 199)}...</p>
+                            <p class="text-sm text-zinc-800">
+                            ${ new Date(item.createdAt).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})} -
+                            <a href="" class="text-indigo-600">${item.fullname}</a>
+                            </p>
+                        </div>`
+                        
+                        container.innerHTML += html
+                    })
+
+                    more.page = more.page + 1
+
+                } else {
+                    container.innerHTML += '<p class="text-zinc-800 mt-6 text-lg">No More Snips. <a href="/publish" class="text-indigo-600">Publish your snips</a>. :)</p>'
+                    more.scroll = false
+                }
+
+            }
+
+            fetchSnips()
+
+            window.addEventListener("scroll", () => {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && more.scroll) {
+                    fetchSnips(more.page)
+                }
+            });
+
+
+        </script>
+    </body>
 </html>

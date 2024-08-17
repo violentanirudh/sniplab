@@ -43,6 +43,6 @@ const fileScheme = new mongoose.Schema({
     },
 }, { timestamps: true })
 
-const Files = mongoose.model('file', fileScheme)
+const Snips = mongoose.model('snip', fileScheme)
 
-module.exports = Files
+module.exports = Snips

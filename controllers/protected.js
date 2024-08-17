@@ -1,11 +1,13 @@
-const fs = require('fs')
-const path = require('path')
 const { createSlug } = require('../utils/helpers')
 const { randomBytes } = require('crypto')
-const Files = require('../models/files')
+const Snips = require('../models/snips')
 
 const renderPublish = (req, res) => {
     res.render('publish', { flash: req.flash('flash') })
+}
+
+const renderPublished = async (req, res) => {
+    res.render('home')
 }
 
 const handlePublish = async (req, res) => {
@@ -47,7 +49,7 @@ const handlePublish = async (req, res) => {
     }
 
     try {
-        await Files.create(data)
+        await Snips.create(data)
         req.flash('flash', { type: 'success', text: 'Snippet Will Be Published After Verification.' })
     } catch (error) {
         req.flash('flash', { type: 'error', text: 'Error saving your data. Please try again.' })
@@ -58,5 +60,5 @@ const handlePublish = async (req, res) => {
 }
 
 module.exports = {
-    renderPublish, handlePublish
+    renderPublish, renderPublished, handlePublish
 }
