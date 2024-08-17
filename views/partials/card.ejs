@@ -1,0 +1,11 @@
+<!-- Article Card -->
+
+<div class="w-full space-y-2">
+    <span class="px-2 py-1 rounded text-sm bg-indigo-600 text-white"><%= file.language %></span>
+    <h2 class="text-2xl font-semibold"><a href="<%= `/${file.uid}/${file.slug}` %>" class="text-zinc-800 hover:text-indigo-600 cursor-pointer"><%= file.heading %></a></h2>
+    <p class="text-zinc-600"><%= file.description.substring(0, 199) + '....' %></p>
+    <p class="text-sm text-zinc-800">
+        <%= new Date(file.createdAt).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})  %> - 
+        <a href="" class="text-indigo-600"><%= file.fullname %></a>
+    </p>
+</div>

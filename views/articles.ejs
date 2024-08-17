@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Snippets</title>
+</head>
+<body class="bg-zinc-50 leading-relaxed">
+
+    <div class="container max-w-screen-md mx-auto py-10 px-4">        
+
+        <%- include('./partials/navbar') %>
+
+        <div class="my-20 space-y-4">
+            
+            <span class="px-3 py-1 rounded text-sm bg-indigo-600 text-white"><%= article.language %></span>
+            <span class="px-3 py-1 text-sm text-zinc-500 rounded bg-white ring-1 ring-zinc-200"><%= article.clicks %> Reads</span>
+            <h2 class="text-2xl font-semibold"><a href="<%= `/${article.uid}/${article.slug}` %>" class="text-zinc-800 hover:text-indigo-600 cursor-pointer"><%= article.heading %></a></h2>
+            <p class="text-sm text-zinc-800">
+                <%= new Date(article.createdAt).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})  %> - 
+                <a href="" class="text-indigo-600"><%= article.fullname %></a>
+            </p>
+            <p class="text-zinc-600"><%= article.description %></p>
+            <pre class=""><code class="language-<%= article.language %>"><%= JSON.parse(article.snippet) %></code></pre>
+
+        </div>
+
+    </div>
+
+    <script src="/public/js/prism.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Snippets | Sign Up</title>
+</head>
+<body class="bg-zinc-50 leading-relaxed">
+
+    <div class="container max-w-screen-md mx-auto py-10 px-4">
+
+        <%- include('./partials/navbar') %>
+
+        <div class="w-full my-20">
+
+            <form class="max-w-96 mx-auto space-y-6" autocomplete="off" action="/auth/signup" method="POST">
+                <%- include('./partials/flash') %>
+                <div class="block">
+                    <label class="box">Full Name</label>
+                    <input type="text" required placeholder="John Doe" name="fullname" class="block py-2 px-4 rounded w-full mt-2 ring-1 ring-zinc-200 shadow outline-none focus:ring-2 focus:ring-indigo-600 duration-100">
+                </div>
+                <div class="block">
+                    <label class="box">Email Address</label>
+                    <input type="email" required placeholder="johndoe@example.com" name="email" class="block py-2 px-4 rounded w-full mt-2 ring-1 ring-zinc-200 shadow outline-none focus:ring-2 focus:ring-indigo-600 duration-100">
+                </div>
+                <div class="block">
+                    <label class="box">Password</label>
+                    <input type="password" required placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" name="password" class="block py-2 px-4 rounded w-full mt-2 ring-1 ring-zinc-200 shadow outline-none focus:ring-2 focus:ring-indigo-600 duration-100">
+                </div>
+                <button type="submit" class="block py-2 px-4 text-white rounded w-32 border-2 border-indigo-600 bg-indigo-600 outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 duration-200">Sign Up</button>
+                <a href="/signin" class="block text-indigo-600">Already have an Account? Sign In</a>
+            </form>
+
+        </div>
+
+    </div>
+    
+</body>
+</html>

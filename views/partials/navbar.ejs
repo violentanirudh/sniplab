@@ -1,0 +1,47 @@
+<!-- Navigation -->
+
+<div class="w-full">
+
+    <div class="flex justify-between items-center">
+
+        <h1 class="text-2xl font-semibold"><a href="/">Snippets</a></h1>
+
+        <div class="flex items-center gap-2 justify-end">
+
+            <% if (typeof(locals.user) == 'undefined') { %>
+                <a href="/signup" class="text-sm text-white hover:ring-4 hover:ring-indigo-100 py-2 px-4 rounded bg-indigo-600 outline-none duration-200">Sign Up</a>
+                <a href="/signin" class="text-sm bg-white hover:bg-zinc-50 py-2 px-4 rounded ring-1 ring-zinc-200 outline-none duration-200">Sign In</a>
+            <% } else { %>
+                <a href="/publish" class="bg-indigo-600 text-white inline-flex py-2 px-2 rounded outline-none duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+                    </svg>                                     
+                </a>
+                <div class="relative inline-block text-left" onclick="toggleDropDown(this)">
+                    <button type="button" class="inline-flex items-center hover:bg-zinc-50 py-2 px-4 rounded w-full ring-1 ring-zinc-200 outline-none duration-200">
+                        <span class="inline-block w-32 truncate"><%= user.fullname %></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-zinc-400 -mr-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                        </svg>                              
+                    </button>
+                    <div id="dropcontent" class="absolute py-2 right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg hidden ring-1 ring-zinc-200">
+                        <div class="py-1 text-sm">
+                            <a href="/published" class="block px-4 py-2 text-zinc-700">Published</a>
+                            <a href="/saved" class="block px-4 py-2 text-zinc-700">Saved</a>
+                            <a href="/account" class="block px-4 py-2 text-zinc-700">Account</a>
+                            <a href="/auth/signout" class="block px-4 py-2 text-zinc-700">Sign Out</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            <% } %>           
+
+    </div>
+
+</div>
+
+<script>
+    const toggleDropDown = (element) => {
+        element.querySelector('#dropcontent').classList.toggle('hidden')
+    }
+</script>

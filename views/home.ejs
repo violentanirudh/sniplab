@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Snippets</title>
+</head>
+<body class="bg-zinc-50 leading-relaxed">
+
+    <div class="container max-w-screen-md mx-auto py-10 px-4">        
+
+        <%- include('./partials/navbar') %>
+
+        <div class="grid grid-template-cols-3 gap-8 my-20">
+            
+            <% files.forEach((file) => { %>
+                <%- include('./partials/card', { file }) %>
+            <% }) %>
+
+        </div>
+
+        <div class="flex items-center justify-end gap-2">
+            <% if (validPages.previous) { %>
+                <a class="text-sm bg-white hover:bg-zinc-50 py-2 px-4 rounded ring-1 ring-zinc-200 outline-none duration-200" href="/page/<%= validPages.page - 1 %>">Previous</a> 
+            <% } %>
+            <% if (validPages.next) { %>
+                <a class="text-sm bg-white hover:bg-zinc-50 py-2 px-4 rounded ring-1 ring-zinc-200 outline-none duration-200" href="/page/<%= validPages.page + 1 %>">Next</a> 
+            <% } %>
+        </div>
+
+    </div>
+    
+</body>
+</html>
