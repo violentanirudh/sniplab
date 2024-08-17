@@ -7,7 +7,7 @@ const renderPublish = (req, res) => {
 }
 
 const renderPublished = async (req, res) => {
-    res.render('home')
+    res.render('published')
 }
 
 const handlePublish = async (req, res) => {

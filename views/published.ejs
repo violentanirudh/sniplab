@@ -17,7 +17,7 @@
 
             const fetchSnips = async (page = 0) => {
 
-                const snips = await fetch('/api/snips?page=' + page)
+                const snips = await fetch(`/api/snips?page=${page}&user`)
                 const container = document.getElementById('cards-container')
 
                 if (snips.status === 200) {

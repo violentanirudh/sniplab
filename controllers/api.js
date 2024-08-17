@@ -7,9 +7,16 @@ const handleGet = async (req, res) => {
 
     const page = parseInt(req.query.page) || 0
 
+    const query = { verified: true }
+
+    // If `userid` is provided, include it in the query
+    if (req.query.user === '') {
+        query.user = req.user.id
+    }
+
     const snips = await Snips.find(
-        { verified: true },
-        { uid: 1, slug: 1, heading: 1, language: 1, description: 1, fullname: 1, createdAt: 1 },
+        query,
+        { uid: 1, slug: 1, heading: 1, language: 1, description: 1, fullname: 1, clicks: 1, createdAt: 1 },
         { skip: length * page, limit: length }
     )
 
