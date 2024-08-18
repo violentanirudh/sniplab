@@ -49,10 +49,10 @@ app.use('/', ViewsRouter)
 app.use('/', AuthMiddleware.checkAuthorization(['user']), ProtectedRouter)
 
 // Server
-// app.listen(process.env.PORT, () => {
-//     console.log(`Listening On : http://127.0.0.1:${process.env.PORT}`)
-// })
+app.listen(process.env.PORT, () => {
+    console.log(`Listening On : http://127.0.0.1:${process.env.PORT}`)
+})
 
 
 
-module.exports = app
+// module.exports = app
