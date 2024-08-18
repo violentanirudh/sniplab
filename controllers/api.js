@@ -7,7 +7,7 @@ const handleGet = async (req, res) => {
 
     const page = parseInt(req.query.page) || 0
 
-    const query = { verified: true }
+    const query = { }
 
     // If `userid` is provided, include it in the query
     if (req.query.user === '') {

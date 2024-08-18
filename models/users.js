@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        bio: {
+            type: String,
+            default: 'I am a curious learner.'
+        },
         role: {
             type: String,
             enum: ["user", "member", "moderator", "admin"],
@@ -38,6 +42,8 @@ userSchema.pre("save", function (next) {
     const hashed = createHmac("sha256", salt)
         .update(this.password)
         .digest("hex");
+    
+    this.email = this.email.toLowerCase()
     this.salt = salt;
     this.password = hashed;
     next();

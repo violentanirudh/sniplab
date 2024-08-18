@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title><%= process.env.APP %> | Publish</title>
+</head>
+<body class="bg-zinc-50 leading-relaxed">
+
+    <div class="container max-w-screen-md mx-auto py-10 px-4">
+
+        <%- include('./partials/navbar') %>
+
+        <div class="w-full my-20">
+
+            <form class="w-full mx-auto space-y-6 mb-10" autocomplete="off" action="/publish" method="POST">
+                <%- include('./partials/flash') %>
+                <div class="block">
+                    <label class="box">Full Name</label>
+                    <input type="text" minlength="10" required placeholder="Full Name" value="<%= locals.user.fullname %>" name="fullname" class="block py-2 px-4 rounded w-full mt-2 ring-1 ring-zinc-200 shadow outline-none focus:ring-2 focus:ring-indigo-600 duration-100">
+                </div>
+                <div class="block">
+                    <label class="box">Email</label>
+                    <input type="text" minlength="10" required placeholder="Email Address" value="<%= locals.user.email %>" name="email" disabled class="block text-zinc-500 bg-zinc-50 py-2 px-4 rounded w-full mt-2 ring-1 ring-zinc-200 shadow outline-none focus:ring-2 focus:ring-indigo-600 duration-100">
+                </div>
+                <div class="block relative">
+                    <label class="box">Bio</label>
+                    <textarea required placeholder="Explain your snippet..." name="description" minlength="100" class="block h-40 py-2 px-4 rounded w-full mt-2 ring-1 ring-zinc-200 shadow outline-none focus:ring-2 focus:ring-indigo-600 duration-100"></textarea>
+                    <p class="mt-1 text-sm text-zinc-500">* Use maximum of 2000 characters.</p>
+                    <span class="absolute right-0 top-2 text-zinc-500 text-sm">0</span>
+                </div>
+                <button type="submit" class="block py-2 px-4 text-white rounded w-32 border-2 border-indigo-600 bg-indigo-600 outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-100 duration-200">Save</button>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+    <script>
+        
+        document.querySelectorAll('textarea').forEach(item => {
+            item.addEventListener('keydown', (e) => {
+                item.parentElement.querySelector('span').innerText = e.target.value.trim().length
+            })
+        })
+
+    </script>
+    
+</body>
+</html>

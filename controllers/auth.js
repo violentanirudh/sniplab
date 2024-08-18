@@ -44,7 +44,7 @@ const handleSignIn = async (req, res) => {
     if (req.user) return res.redirect('/')
 
     const { email, password } = req.body
-    const user = await User.validate(email, password)
+    const user = await User.validate(email.toLowerCase(), password)
     if ( !user ) {
         req.flash('flash', { type: 'error', text: 'Invalid Credentials.'})
         return res.redirect('/signin')

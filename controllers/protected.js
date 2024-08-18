@@ -2,6 +2,10 @@ const { createSlug } = require('../utils/helpers')
 const { randomBytes } = require('crypto')
 const Snips = require('../models/snips')
 
+const renderAccount = async (req, res) => {
+    res.render('account', { flash: req.flash('flash') })
+}
+
 const renderPublish = (req, res) => {
     res.render('publish', { flash: req.flash('flash') })
 }
@@ -60,5 +64,5 @@ const handlePublish = async (req, res) => {
 }
 
 module.exports = {
-    renderPublish, renderPublished, handlePublish
+    renderAccount, renderPublish, renderPublished, handlePublish
 }

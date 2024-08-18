@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const { renderPublish, renderPublished, handlePublish } = require('../controllers/protected')
+const { renderAccount, renderPublish, renderPublished, handlePublish } = require('../controllers/protected')
+
+router.route('/account')
+    .get(renderAccount)
 
 router.route('/publish')
     .get(renderPublish)
