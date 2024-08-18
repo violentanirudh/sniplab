@@ -6,7 +6,7 @@ const app = require('./app')
 
 const cpus = os.cpus().length
 
-if (cluster.isMaster) {
+if (cluster.isMaster && (process.env.CLUSTERS == 'true')) {
     console.log(`Master ${process.pid}`)
     for (let i = 0; i < cpus; i++) 
         cluster.fork()
