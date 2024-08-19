@@ -11,3 +11,4 @@
 05. Clusters
 06. Deleting Snip
 07. Copy Code Button
+08. Edit Snip

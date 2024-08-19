@@ -869,6 +869,14 @@ video {
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
 
+.overflow-x-auto{
+  overflow-x: auto;
+}
+
+.overflow-x-scroll{
+  overflow-x: scroll;
+}
+
 .truncate{
   overflow: hidden;
   text-overflow: ellipsis;

@@ -22,7 +22,7 @@
                     </button>
                     <div id="dropcontent" class="absolute px-2 right-0 top-12 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg hidden ring-zinc-200">
                         <div class="py-2 text-sm space-y-2">
-                            <button class="block px-4 py-2 cursor-pointer bg-blue-100 text-blue-700 w-full rounded">Edit</button>
+                            <button class="block px-4 py-2 cursor-pointer bg-blue-100 text-blue-700 w-full rounded" onclick="editSnip()">Edit</button>
                             <button class="block px-4 py-2 cursor-pointer bg-red-100 text-red-700 w-full rounded" onclick="toggleModel('#model')">Delete</button>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                 <p class="text-zinc-600"><%= article.description %></p>
                 <div class="relative">
                     <button onclick="copyContent(this)" class="absolute right-2 top-2 bg-slate-100 py-1 w-16 rounded text-sm">Copy</button>
-                    <pre class=""><code class="language-<%= article.language %>"><%= JSON.parse(article.snippet) %></code></pre>
+                    <pre class="prism"><code class="language-<%= article.language %>"><%= JSON.parse(article.snippet) %></code></pre>
                 </div>
             </div>
 
@@ -81,6 +81,11 @@
 
     <script src="/public/js/prism.js"></script>
     <script>
+
+        const editSnip = () => {
+            window.location = '/edit/<%= article.uid %>/<%= article.slug %>'
+        }
+
         const toggleModel = (id) => {
             const element = document.querySelector(id).classList
             if (element.contains('hidden')) {
@@ -91,6 +96,7 @@
                 element.remove('flex')
             }
         }
+
         const deleteSnip = async () => {
             toggleModel('#model')
             toggleModel('#delete-notifier')
