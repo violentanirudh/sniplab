@@ -12,3 +12,5 @@
 06. Deleting Snip
 07. Copy Code Button
 08. Edit Snip
+09. Profile
+10. Skeleton

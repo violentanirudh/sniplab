@@ -17,6 +17,6 @@ if (cluster.isMaster && (process.env.CLUSTERS === 'true')) {
 } else {
     const server = http.createServer(app)
     server.listen(process.env.PORT, () => {
-        console.log(`Worker ${process.pid} running`)
+        console.log(`${process.pid} running : http://127.0.0.1:${process.env.PORT}`)
     })
 }

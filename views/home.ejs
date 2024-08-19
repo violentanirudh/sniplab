@@ -7,8 +7,12 @@
     <body class="bg-zinc-50 leading-relaxed">
         <div class="container max-w-screen-md mx-auto py-10 px-4">
             <%- include('./partials/navbar') %>
-
-            <div id="cards-container" class="grid grid-template-cols-3 gap-8 my-20"></div>
+            <div class="my-20 space-y-8">
+                <div id="cards-container" class="grid grid-template-cols-3 gap-8">
+                </div>
+                <%- include('./partials/skeleton') %>
+                <p class="text-zinc-800 mt-6 text-lg hidden" id="noSnips">No More Snips. <a href="/publish" class="text-indigo-600">Publish your snips</a>. :)</p>
+            </div>
         </div>
 
         <script>
@@ -17,6 +21,7 @@
 
             const fetchSnips = async (page = 0) => {
 
+                if (page != 0)document.querySelector('#skeleton').classList.toggle('hidden')
                 const snips = await fetch('/api/snips?page=' + page)
                 const container = document.getElementById('cards-container')
 
@@ -45,8 +50,9 @@
 
                 }
                 
+                document.querySelector('#skeleton').classList.toggle('hidden')
                 if (!more.scroll || snips.status !== 200) {
-                    container.innerHTML += '<p class="text-zinc-800 mt-6 text-lg">No More Snips. <a href="/publish" class="text-indigo-600">Publish your snips</a>. :)</p>'
+                    document.querySelector('#noSnips').classList.remove('hidden')
                     more.scroll = false
                 }
 
