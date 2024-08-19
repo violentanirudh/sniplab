@@ -7,7 +7,7 @@ const handleGet = async (req, res) => {
 
     const page = parseInt(req.query.page) || 0
 
-    const query = { }
+    const query = { verified: true }
 
     // If `userid` is provided, include it in the query
     if (req.query.user === '') {
@@ -30,6 +30,18 @@ const handleGet = async (req, res) => {
     return res.json({ status: 'success', data: json })
 }
 
+const handleDelete = async (req, res) => {
+    const { uid, slug } = req.params
+
+    if (!req.user) return res.status(401).json({ status: 'error', data: 'Unauthorized' })
+
+    const snip = await Snips.deleteOne({ uid, slug, user: req.user.id })
+    
+    if (snip) return res.status(200).json({ status: 'success', data: "Deleted" })
+        
+    return res.status(400).json({ status: 'error', data: 'Bad Request' })
+}
+
 module.exports = {
-    handleGet
+    handleGet, handleDelete
 }
