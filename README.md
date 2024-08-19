@@ -10,3 +10,4 @@
 04. Infinite Scroll
 05. Clusters
 06. Deleting Snip
+07. Copy Code Button

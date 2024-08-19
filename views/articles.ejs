@@ -53,7 +53,10 @@
                     <a href="" class="text-indigo-600"><%= article.fullname %></a>
                 </p>
                 <p class="text-zinc-600"><%= article.description %></p>
-                <pre class=""><code class="language-<%= article.language %>"><%= JSON.parse(article.snippet) %></code></pre>
+                <div class="relative">
+                    <button onclick="copyContent(this)" class="absolute right-2 top-2 bg-slate-100 py-1 w-16 rounded text-sm">Copy</button>
+                    <pre class=""><code class="language-<%= article.language %>"><%= JSON.parse(article.snippet) %></code></pre>
+                </div>
             </div>
 
         </div>
@@ -103,6 +106,13 @@
                 document.querySelector('#delete-notifier')
                     .querySelector('span').innerText = "Delete <%= article.uid%> Failed! Try again later."
             }
+        }
+        const copyContent = (element) => {
+            element.innerText = 'Copied'
+            setTimeout(() => {
+                element.innerText = 'Copy'
+            }, 400)
+            navigator.clipboard.writeText(element.nextElementSibling.innerText)
         }
     </script>
 
