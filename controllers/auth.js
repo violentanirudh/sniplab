@@ -52,6 +52,7 @@ const handleSignIn = async (req, res) => {
 
     const data = { 
         id: user._id,
+        username: user.username,
         fullname: user.fullname, 
         email: user.email,
         image: user.image,

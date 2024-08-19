@@ -33,7 +33,7 @@
                             <p class="text-zinc-600">${item.description.substring(0, 199)}...</p>
                             <p class="text-sm text-zinc-800">
                             ${ new Date(item.createdAt).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})} -
-                            <a href="" class="text-indigo-600">${item.fullname}</a>
+                            <a href="/r/${item.user}" class="text-indigo-600">${item.fullname}</a>
                             </p>
                         </div>`
                         

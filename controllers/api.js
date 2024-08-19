@@ -16,7 +16,7 @@ const handleGet = async (req, res) => {
 
     const snips = await Snips.find(
         query,
-        { uid: 1, slug: 1, heading: 1, language: 1, description: 1, fullname: 1, clicks: 1, createdAt: 1 },
+        { uid: 1, slug: 1, heading: 1, language: 1, description: 1, fullname: 1, clicks: 1, user: 1, createdAt: 1 },
         { skip: length * page, limit: length }
     )
 

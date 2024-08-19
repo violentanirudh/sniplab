@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title><%= process.env.APP %> | <%= user.fullname %></title>
+</head>
+<body class="bg-zinc-50 leading-relaxed">
+
+    <div class="container max-w-screen-md mx-auto py-10 px-4">
+
+        <%- include('./partials/navbar') %>
+
+        <div class="w-full my-20">
+
+            <p><%= user.fullname %></p>
+            <p>@<%= user.username %></p>
+            <p><%= user.bio %></p>
+
+        </div>
+
+    </div>
+
+    <script>
+        
+        document.querySelectorAll('textarea').forEach(item => {
+            item.addEventListener('keydown', (e) => {
+                item.parentElement.querySelector('span').innerText = e.target.value.trim().length
+            })
+        })
+
+        window.history.replaceState({}, null, '/@/<%= user.username %>')
+
+    </script>
+    
+</body>
+</html>
