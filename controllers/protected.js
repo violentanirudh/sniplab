@@ -1,5 +1,6 @@
 const { createSlug } = require('../utils/helpers')
 const { randomBytes } = require('crypto')
+const sharp = require('sharp')
 const Snips = require('../models/snips')
 
 const renderAccount = async (req, res) => {
@@ -72,6 +73,22 @@ const handleEdit = async (req, res) => {
 
 }
 
+const handleAccount = async (req, res) => {
+    if (req.file) {
+        const filepath = req.file.path;
+        try {
+            const file = await sharp(filepath)
+                .resize({ width: 500 })
+                .toFormat('jpeg')
+                .toFile(filepath.replace(/(\.[\w\d_-]+)$/i, '-compressed.jpg'))
+            console.log(file);
+        } catch (error) {
+            console.log('Error compressing the file.', error)
+        }
+    }
+    return res.send('hello')
+}
+
 const handlePublish = async (req, res) => {
 
     const languages = ['html', 'css', 'javascript', 'python', 'sql', 'react']
@@ -123,5 +140,5 @@ const handlePublish = async (req, res) => {
 }
 
 module.exports = {
-    renderAccount, renderPublish, renderEdit, renderPublished, handlePublish, handleEdit
+    renderAccount, renderPublish, renderEdit, renderPublished, handlePublish, handleEdit, handleAccount
 }
