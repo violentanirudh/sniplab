@@ -9,25 +9,29 @@ const handleGet = async (req, res) => {
 
     const query = { verified: true }
 
-    // If `userid` is provided, include it in the query
-    if (req.query.user === '') {
-        query.user = req.user.id
+    // If `user` is provided, include it in the query
+    if ('user' in req.query) {
+        query.user = req.query.user || req.user.id
     }
 
-    const snips = await Snips.find(
-        query,
-        { uid: 1, slug: 1, heading: 1, language: 1, description: 1, fullname: 1, clicks: 1, user: 1, createdAt: 1 },
-        { skip: length * page, limit: length }
-    )
+    try {
+        const snips = await Snips.find(
+            query,
+            { uid: 1, slug: 1, heading: 1, language: 1, description: 1, fullname: 1, clicks: 1, user: 1, createdAt: 1 },
+            { skip: length * page, limit: length }
+        )
 
-    if (snips.length === 0) return res.status(404).json({ status: 'error', data: 'No Data Found' })
+        if (snips.length === 0) return res.status(404).json({ status: 'error', data: 'No Data Found' })
 
-    const json = {
-        snips,
-        more: snips.length === length
+        const json = {
+            snips,
+            more: snips.length === length
+        }
+
+        return res.json({ status: 'success', data: json })
+    } catch (error) {
+        return res.status(400).json({ status: 'error', data: 'Bad Request' })
     }
-
-    return res.json({ status: 'success', data: json })
 }
 
 const handleDelete = async (req, res) => {

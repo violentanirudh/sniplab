@@ -7,8 +7,16 @@
     <body class="bg-zinc-50 leading-relaxed">
         <div class="container max-w-screen-md mx-auto py-10 px-4">
             <%- include('./partials/navbar') %>
-            <div class="my-20 space-y-8">
-                <div id="cards-container" class="grid grid-template-cols-3 gap-8">
+            <div class="flex w-fit rounded ring-1 ring-zinc-200 p-1 mt-8">
+                <button class="px-4 py-1 bg-indigo-600 text-white rounded divide-zinc-50">Recent</button>
+                <button class="px-4 py-1">Popular</button>
+            </div>
+            <div class="my-12">
+                <h2 class=" text-3xl font-semibold">Recent Snips</h2>
+                <p class="text-zinc-500">Read the latest snips from our community</p>
+            </div>
+            <div class="mb-20 space-y-8">
+                <div id="cards-container" class="grid gap-8">
                 </div>
                 <%- include('./partials/skeleton') %>
                 <p class="text-zinc-800 mt-6 text-lg hidden" id="noSnips">No More Snips. <a href="/publish" class="text-indigo-600">Publish your snips</a>. :)</p>
@@ -34,7 +42,7 @@
                         `<div class="w-full space-y-2">
                             <span class="px-2 py-1 rounded text-sm bg-indigo-600 text-white">${item.language}</span>
                             <span class="px-3 py-1 text-sm text-zinc-500 rounded bg-white ring-1 ring-zinc-200">${item.clicks} Reads</span>
-                            <h2 class="text-2xl font-semibold"><a href="${item.uid}/${item.slug}" class="text-zinc-800 hover:text-indigo-600 cursor-pointer">${item.heading}</a></h2>
+                            <h2 class="text-xl font-semibold"><a href="${item.uid}/${item.slug}" class="text-zinc-800 hover:text-indigo-600 cursor-pointer">${item.heading}</a></h2>
                             <p class="text-zinc-600">${item.description.substring(0, 199)}...</p>
                             <p class="text-sm text-zinc-800">
                             ${ new Date(item.createdAt).toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})} -

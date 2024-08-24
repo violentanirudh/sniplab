@@ -14,6 +14,6 @@ export const options = {
 };
 
 export default function () {
-    const res = http.get("https://sniplab.vercel.app/api/snips");
+    const res = http.get("http://localhost:4000/api/snips");
     check(res, { "status was 200": (r) => r.status == 200 });
 }
